@@ -11,9 +11,12 @@ func main() {
 
 	myNumber := 23
 
-	var ptr = &myNumber
+	var ptr = &myNumber //referencing a pointer to a number that's why using "&"
 
-	fmt.Println("Value of actual pointer is ", ptr)
-	fmt.Println("Value of actual pointer is ", *ptr)
+	fmt.Println("Value of actual pointer is ", ptr)  //refers to the address to the pointer
+	fmt.Println("Value of actual pointer is ", *ptr) //refers to what value inside the pointer
+
+	*ptr = *ptr * 2
+	fmt.Println("New Value is: ", myNumber)
 
 }
