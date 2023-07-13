@@ -10,7 +10,7 @@ func main() {
 	hitesh := User{"Bhanu", "hitesh@go.dev", true, 18}
 	fmt.Println(hitesh)
 	fmt.Printf("hitesh details are: %+v\n", hitesh)
-	fmt.Printf("Name is %v and email is %v\n", hitesh.Name, hitesh.Email)
+	fmt.Printf("Name is %v and email %v\n", hitesh.Name, hitesh.Email)
 	hitesh.GetStatus()
 	hitesh.NewMail()
 
