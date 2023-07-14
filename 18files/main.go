@@ -34,6 +34,6 @@ func readFile(filename string) {
 
 func checkNilErr(err error) {
 	if err != nil {
-		panic(err)
+		panic(err) //panic shutdown the execution of the program and shows the error .
 	}
 }
