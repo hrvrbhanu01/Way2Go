@@ -1,0 +1,19 @@
+go 1.20
+
+use (
+	./01hello
+	./02variables
+	./08myarray
+	./09myslices
+	./10mymaps
+	./11mystructs
+	./12ifelse
+	./13switchcase
+	./14loops
+	./15functions
+	./16methods
+	./17defer
+	./18files
+	./19webrequests
+	./21webreqverbs
+)
