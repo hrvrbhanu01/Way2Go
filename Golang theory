@@ -1,0 +1,24 @@
+                                            ### Starting my journey as a Gofer
+ 
+* it is a compiled language.(we run it through .exe)
+
+* go tool can run file directly, without VM
+
+* executables are different for OS
+
+* we can use Go in system apps to web apps- Cloud
+
+* similarity with lots of languages- C, java, Pascal
+
+* object Oriented:- Yes or No as :
+we don't have classes in golang , we have structs here.
+
+we don't have any kind of overloading here
+we don't have operator overloading
+we don't have method overloading
+
+
+* Missing :(as we dont need them here in Go)
+we don't have try,catch here.
+lexer does a lot of work for you:- you don't have to write semicolons here.
+
