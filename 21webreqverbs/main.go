@@ -9,7 +9,8 @@ import (
 
 func main() {
 	fmt.Println("Welcome to web request video!")
-	PerformGetRequest()
+	//PerformGetRequest()
+	PerformPostJsonRequest()
 }
 
 func PerformGetRequest() {
@@ -34,4 +35,27 @@ func PerformGetRequest() {
 	// fmt.Println(content)
 	// fmt.Println(string(content))
 
+}
+
+func PerformPostJsonRequest(){
+	const myurl = "http://localhost:8000/post"
+
+	//fake json payload
+	requestBody := strings.NewReader(`
+	{
+		"name": "John",
+		"age": 30,
+		"city": "New York"
+	}`)
+
+	response,err:= http.Post(myurl, "application/json", requestBody)
+
+	if err!=nil{
+		panic(err)
+	}
+	defer response.Body.Close()
+
+	content, _:= ioutil.ReadAll(response.Body)
+
+	fmt.Println(string(content))
 }
