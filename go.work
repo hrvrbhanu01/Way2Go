@@ -17,4 +17,5 @@ use (
 	./19webrequests
 	./21webreqverbs
 	./23go-modules
+	./24buildAPI
 )
