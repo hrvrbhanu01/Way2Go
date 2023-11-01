@@ -60,8 +60,8 @@ func getOneCourse(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r) //get the parameters
 
 	// loop through the courses , find the matching id and return the response
-	for _, course:=range courses{
-		if course.CourseId==params["id"]{
+	for _, course := range courses {
+		if course.CourseId == params["id"] {
 			json.NewEncoder(w).Encode(course)
 			return
 		}
@@ -70,31 +70,53 @@ func getOneCourse(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-func createOneCourse(w http.ResponseWriter, r *http.Request){
+func createOneCourse(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Create One Course")
 	w.Header().Set("Content-Type", "application/json")
 
 	// what-if : body is empty
-	if r.Body==nil{
+	if r.Body == nil {
 		json.NewEncoder(w).Encode("Please send some Data")
 	}
 
 	// what about the data being sent about as - {}
 
 	var course Course
-	_= json.NewDecoder(r.Body).Decode(&course)
-	if course.IsEmpty(){
+	_ = json.NewDecoder(r.Body).Decode(&course)
+	if course.IsEmpty() {
 		json.NewEncoder(w).Encode("Please provide all fields")
 		return
 	}
 
-	// generate a unique id, convert them to string 
+	// generate a unique id, convert them to string
 	// append course into courses
 
 	rand.Seed(time.Now().UnixNano())
-	course.CourseId=strconv.Itoa(rand.Intn(100))
+	course.CourseId = strconv.Itoa(rand.Intn(100))
 	courses = append(courses, course)
 	json.NewEncoder(w).Encode(course)
 	return
 
+}
+
+func updateOneCourse(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Update One Course")
+	w.Header().Set("Content-Type", "application/json")
+
+	//first - grab id from request
+	params := mux.Vars(r) //get the parameters
+
+	// loop through the value, hit the id, remove the value , add the value with my ID
+	for index, course := range courses {
+		if course.CourseId == params["id"] { //course has this CourseId ,if that matches the value provided i.e. params
+			courses = append(courses[:index], courses[index+1:]...)
+			var course Course
+			_=json.NewDecoder(r.Body).Decode(&course)
+			course.CourseId = params["id"]
+			courses = append(courses, course)
+			json.NewEncoder(w).Encode(course)
+			return
+		}
+	}
+	//TODO: send a response when id is not found
 }
