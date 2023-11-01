@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 	"strconv"
@@ -15,7 +16,7 @@ import (
 type Course struct {
 	CourseId    string  `json:"courseid"`
 	CourseName  string  `json:"coursename"`
-	CoursePrice int     `json:"courseprice"`
+	CoursePrice int     `json:"-"`
 	Author      *Author `json:"author"`
 }
 
@@ -35,7 +36,25 @@ func (c *Course) IsEmpty() bool {
 }
 
 func main() {
+	fmt.Println("API- LCO.in")
+	r:=mux.NewRouter()
 
+	//seeding
+	courses=append(courses, Course{CourseId: "2", CourseName: "nodejs", CoursePrice: 299, Author: &Author{Fullname: "Bhanu Prakash", Website: "go.dev"}})
+	courses=append(courses, Course{CourseId: "4", CourseName: "golang", CoursePrice: 599, Author: &Author{Fullname: "Prakash", Website: "lco.dev"}})
+
+
+	//routing
+	r.HandleFunc("/", serveHome).Methods("GET")
+	r.HandleFunc("/courses", getAllCourses).Methods("GET")
+	r.HandleFunc("/courses/{id}", getOneCourse).Methods("GET")
+	r.HandleFunc("/courses", createOneCourse).Methods("POST")
+	r.HandleFunc("/courses/{id}", updateOneCourse).Methods("PUT")
+	r.HandleFunc("/courses/{id}", deleteOneCourse).Methods("DELETE")
+
+
+	//listen to a port
+	log.Fatal(http.ListenAndServe(":4000", r))
 }
 
 //controllers - file(i.e it will have different files)
@@ -135,4 +154,5 @@ func deleteOneCourse(w http.ResponseWriter, r *http.Request){
 			courses = append(courses[:index], courses[index+1:]...)
 			break //break -breaks the entire loop
 	}
+}
 }
