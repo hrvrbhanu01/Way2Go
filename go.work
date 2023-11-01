@@ -16,4 +16,5 @@ use (
 	./18files
 	./19webrequests
 	./21webreqverbs
+	./23go-modules
 )
