@@ -18,4 +18,5 @@ use (
 	./21webreqverbs
 	./23go-modules
 	./24buildAPI
+	./25mongoAPI
 )
